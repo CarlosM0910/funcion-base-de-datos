@@ -1,0 +1,14 @@
+delimiter //
+CREATE FUNCTION contarProductos (idcat int) /*se crea la funcion contarProductos y dentro del parentesis se dice que tipo de datos va a recibir*/
+RETURNS int 
+deterministic /* la función siempre devuelve el mismo resultado si se le pasa el mismo idCat*/
+BEGIN
+
+DECLARE totaldeproducto Int; /*declaro la variable donde voy a insertar los datos que necesito*/
+
+select count(*) into totaldeproducto from productos  /*con el count, cuento la cantidad de datos que estan en la tabla productos donde el id de categoria que el usuario insertó, sea el mismo del de la tabla */
+where id_categoria = idcat;  /*se pone el igual ya que el nombre de idcategoria que el usuario inserta no es el mismo del de la tabla, entonces especifico con el igual que es lo mismo, para que en la formula trabaje sin error*/
+
+return totaldeproducto ; /*Devuelvo el número total de productos en la categoría que se especifico en idcat*/
+ 
+END //
